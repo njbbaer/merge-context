@@ -22,7 +22,10 @@ def parse_patterns(input_path):
 def format_file(path):
     ext = Path(path).suffix.lstrip(".")
     with open(path) as f:
-        return f"`{path}`\n\n```{ext}\n{f.read()}```\n\n"
+        content = f.read()
+        if not content.endswith("\n"):
+            content += "\n"
+        return f"`{path}`\n\n```{ext}\n{content}```\n\n"
 
 
 def create_merged_markdown(input_list_path, output_path):
